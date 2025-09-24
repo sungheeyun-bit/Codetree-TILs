@@ -8,7 +8,7 @@ const grid = input.slice(1).map(line => line.split(' ').map(Number));
 
 let maxCount = 0;
 
-function dfs(x, y) {
+function countCoins(x, y) {
     let count = 0;
     for(let i=x; i<x + 3; i++) {
         for(let j=y; j<y + 3; j++) {
@@ -18,9 +18,9 @@ function dfs(x, y) {
     return count;
 }
 
-for(let i=0; i<n-2; i++) {
-    for(let j=0; j<n-2; j++) {
-        let curCount = dfs(i, j);
+for(let i=0; i<=n-3; i++) {
+    for(let j=0; j<=n-3; j++) {
+        let curCount = countCoins(i, j);
         maxCount = Math.max(curCount, maxCount);
     }
 }
