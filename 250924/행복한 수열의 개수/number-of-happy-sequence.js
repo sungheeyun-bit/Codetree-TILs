@@ -16,12 +16,26 @@ for(let i=0; i<n; i++) {
 
 let result = 0;
 for(let i=0; i<grid.length; i++) {
-    let count = 1;
-    for(let j=0; j<grid[i].length - 1; j++) {
-        if(grid[i][j] === grid[i][j+1]) count++;
+    if(m === 1) {
+        result++;
+        continue;
     }
-
-    if(count >= m) result++;
+    
+    let count = 1;
+    let happy = false;
+    for(let j=0; j<grid[i].length - 1; j++) {
+        if(grid[i][j] === grid[i][j+1]) {
+            count++;
+            if(count >= m) {
+                happy = true;
+                break;
+            }
+        } else {
+            count = 1;
+        }
+    }
+    
+    if(happy) result++;
 }
 
 console.log(result);
