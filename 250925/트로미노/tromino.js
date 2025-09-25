@@ -26,9 +26,9 @@ function sumLBlockRotations(x, y) {
 
     if(x + 1 < n && y + 1 < m) {
         sum = Math.max(sum, grid[x][y] + grid[x + 1][y] + grid[x + 1][y + 1]);
-        sum = Math.max(sum, grid[x][y] + grid[x][y + 1] + grid[x + 1][[y + 1]]);
-        sum = Math.max(sum, grid[x][y] + grid[x][y + 1] + grid[x + 1][[y]]);
-        sum = Math.max(sum, grid[x+1][y] + grid[x][y + 1] + grid[x + 1][[y + 1]]);
+        sum = Math.max(sum, grid[x][y] + grid[x][y + 1] + grid[x + 1][y + 1]);
+        sum = Math.max(sum, grid[x][y] + grid[x][y + 1] + grid[x + 1][y]);
+        sum = Math.max(sum, grid[x+1][y] + grid[x][y + 1] + grid[x + 1][y + 1]);
     }
 
     return sum;
