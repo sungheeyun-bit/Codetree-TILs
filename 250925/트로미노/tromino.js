@@ -1,47 +1,36 @@
 const fs = require("fs");
-const input = fs.readFileSync(0).toString().trim().split('\n');
+const raw = fs.readFileSync(0, "utf8").trim().split("\n");
+const [n, m] = raw[0].split(/\s+/).map(Number);
+const grid = raw.slice(1, 1 + n).map(line => line.split(/\s+/).map(Number));
 
-const [n, m] = input[0].split(' ').map(Number);
-const grid = input.slice(1, 1 + n).map(line => line.split(' ').map(Number));
+// 트로미노 모양 정의 (offset 좌표)
+const shapes = [
+  // 일자 - 가로, 세로
+  [[0,0],[0,1],[0,2]],
+  [[0,0],[1,0],[2,0]],
 
-// Please Write your code here.
+  // ㄴ 블럭 - 4가지
+  [[0,0],[1,0],[1,1]],
+  [[0,0],[0,1],[1,0]],
+  [[0,0],[0,1],[1,1]],
+  [[0,1],[1,0],[1,1]]
+];
 
 let maxSum = 0;
-function sumLineBlockRotations(x, y) {
-    let sum = 0;
 
-    if(x + 1 < n && x + 2 < n) {
-        sum = Math.max(sum, grid[x][y] + grid[x + 1][y] + grid[x + 2][y]);
+for (let i = 0; i < n; i++) {
+  for (let j = 0; j < m; j++) {
+    for (const shape of shapes) {
+      let sum = 0;
+      let ok = true;
+      for (const [dx, dy] of shape) {
+        const x = i + dx, y = j + dy;
+        if (x < 0 || x >= n || y < 0 || y >= m) { ok = false; break; }
+        sum += grid[x][y];
+      }
+      if (ok && sum > maxSum) maxSum = sum;
     }
-
-    if(y + 1 < m && y + 2 < m) {
-        sum = Math.max(sum, grid[x][y] + grid[x][y + 1] + grid[x][y +2 ]);
-    }
-    
-    return sum;
-}
-
-function sumLBlockRotations(x, y) {
-    let sum = 0;
-
-    if(x + 1 < n && y + 1 < m) {
-        sum = Math.max(sum, grid[x][y] + grid[x + 1][y] + grid[x + 1][y + 1]);
-        sum = Math.max(sum, grid[x][y] + grid[x][y + 1] + grid[x + 1][y + 1]);
-        sum = Math.max(sum, grid[x][y] + grid[x][y + 1] + grid[x + 1][y]);
-        sum = Math.max(sum, grid[x+1][y] + grid[x][y + 1] + grid[x + 1][y + 1]);
-    }
-
-    return sum;
-}
-
-
-for(let i=0; i<grid.length; i++) {
-    for(let j=0; j<grid[0].length; j++) {
-        let sum1 = sumLBlockRotations(i, j);
-        let sum2 = sumLineBlockRotations(i, j);
-
-        maxSum = Math.max(maxSum, sum1, sum2);
-    }
+  }
 }
 
 console.log(maxSum);
