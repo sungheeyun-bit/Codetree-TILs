@@ -5,30 +5,15 @@ const n = Number(input[0]);
 
 // Please Write your code here.
 const map = new Map();
-
-map.set(3, 5);
-map.set(10000, 1);
-if(map.has(3)) {
-    console.log(map.get(3));
-} else console.log('None');
-
-if(map.has(5)) {
-    console.log(map.get(5));
-} else console.log('None');
-
-if(map.has(10000)) {
-    console.log(map.get(10000));
-} else console.log('None');
-
-map.set(3, 10)
-
-if(map.has(3)) {
-    console.log(map.get(3));
-} else console.log('None');
-
-map.set(7, 15);
-map.delete(3);
-map.delete(7);
-if(map.has(7)) {
-    console.log(map.get(7));
-} else console.log('None');
+for(let i=1; i<=n; i++) {
+    const arr = input[i].split(' ');
+    
+    if(arr[0] === 'add') {
+        map.set(Number(arr[1]), Number(arr[2]));
+    } else if (arr[0] === 'find') {
+        if(map.has(Number(arr[1]))) console.log(map.get(Number(arr[1])));
+        else console.log('None');
+    } else if (arr[0] === 'remove') {
+        map.delete(Number(arr[1]));
+    }
+}
