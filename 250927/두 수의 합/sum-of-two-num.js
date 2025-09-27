@@ -25,5 +25,7 @@ if(sum.has(k)) {
     let target = sum.get(k).flat();
     let unique = new Set(target);
     
-    console.log(Math.ceil(unique.size / 2));
+    if(unique.size / 2 === 0) console.log(unique.size / 2);
+    else console.log(Math.ceil(unique.size / 2));  
 }
+
