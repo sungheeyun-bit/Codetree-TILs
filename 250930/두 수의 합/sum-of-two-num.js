@@ -8,7 +8,6 @@ const arr = input[1].split(' ').map(Number);
 const sumMap = new Map();
 arr.sort();
 
-const combi = [];
 for(let i=0; i<n; i++) {
     for(let j=i+1; j<n; j++) {
         let sum = arr[i] + arr[j];
