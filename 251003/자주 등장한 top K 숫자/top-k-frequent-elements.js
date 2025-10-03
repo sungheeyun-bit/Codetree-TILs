@@ -16,7 +16,7 @@ arr.forEach(num => {
 const countArr = [...count];
 const sort = countArr.sort((a, b) => {
     if(b[1] === a[1]) return b[0] - a[0];
-    else b[1] - a[1];
+    else return b[1] - a[1];
 });
 
 let result = '';
